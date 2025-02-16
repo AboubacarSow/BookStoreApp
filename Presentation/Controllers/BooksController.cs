@@ -39,7 +39,7 @@ namespace Presentation.Controllers
         public IActionResult UpdateOneBook([FromRoute] int id, [FromBody] BookDtoUpdate book)
         {            
             if (id != book.id)
-                throw new BookBadRequestException("Not match wiht two ID");
+                throw new BookBadRequestException("Not match founded wiht two ID");
             if(book is null)
                 throw new BookBadRequestException("Book is Null");//400
             if(!ModelState.IsValid)
