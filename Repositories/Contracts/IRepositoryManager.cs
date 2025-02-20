@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Repositories.Contracts
+﻿namespace Repositories.Contracts
 {
     public interface IRepositoryManager
     {
@@ -13,6 +7,6 @@ namespace Repositories.Contracts
         
         //Ici nous n'avons pour le moment que IBookRepository
         IBookRepository Book {  get; }
-        void Save();
+        Task SaveAsync();
     }
 }

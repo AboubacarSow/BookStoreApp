@@ -31,11 +31,11 @@ namespace Repositories.Models
                 _context.Set<T>();  
         }
 
-        public T? FindByCondition(Expression<Func<T, bool>> condition, bool trackChanges)
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> condition, bool trackChanges)
         {
             return !trackChanges ?
-                   _context.Set<T>().Where(condition).AsNoTracking().SingleOrDefault():
-                   _context.Set<T>().Where(condition).SingleOrDefault();   
+                   _context.Set<T>().Where(condition).AsNoTracking():
+                   _context.Set<T>().Where(condition);   
         }
 
         public void Update(T entity)
