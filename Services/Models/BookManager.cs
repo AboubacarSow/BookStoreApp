@@ -2,6 +2,7 @@
 using Entities.DataTransfertObjects;
 using Entities.Exceptions;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Repositories.Contracts;
 using Services.Contracts;
 
@@ -34,10 +35,12 @@ namespace Services.Models
             await _manager.SaveAsync();
         }
 
-        public async Task<IEnumerable<BookDto>> GetAllBooksAsync(bool trackChanges)
+        //Why is it necessary to return a tuple in this level?
+        public async Task<(IEnumerable<BookDto>,MetaData)> GetAllBooksAsync(BookParameters bookParameters, bool trackChanges)
         {
-            var books=await _manager.Book.GetAllBooksAsync(trackChanges);
-            return  _mapper.Map<IEnumerable<BookDto>>(books);
+            var booksWithPagedList=await _manager.Book.GetAllBooksAsync(bookParameters,trackChanges);
+           var bookDto=  _mapper.Map<IEnumerable<BookDto>>(booksWithPagedList);
+            return (bookDto, booksWithPagedList.MetaData);
         }
 
         public async Task<BookDto?> GetOneBookByIdAsync(int id, bool trackChanges)

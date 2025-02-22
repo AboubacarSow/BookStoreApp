@@ -41,6 +41,9 @@ namespace WebApi
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureLoggerService();
             builder.Services.ConfigureActionFiltersAttribute();
+
+            //We configure our api policy here by expoxing the X-Pagination header as well
+            builder.Services.ConfigureCors();
             //builder.Services.AddAutoMapper(typeof(Services.AssemblyReference).Assembly);
             builder.Services.AddAutoMapper(typeof(Program));
            
@@ -63,9 +66,10 @@ namespace WebApi
                 app.UseHsts();  
             }
             app.UseHttpsRedirection();
+            //Here we allow our api's consumers to access it
+            app.UseCors(policyName: "CorsPolicy");
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

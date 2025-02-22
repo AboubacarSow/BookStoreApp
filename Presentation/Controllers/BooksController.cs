@@ -1,10 +1,11 @@
 ﻿using Entities.DataTransfertObjects;
 using Entities.Exceptions;
-using Entities.Models;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ActionFilters;
 using Services.Contracts;
+using System.Text.Json;
 
 namespace Presentation.Controllers
 {
@@ -13,10 +14,11 @@ namespace Presentation.Controllers
     public class BooksController(IServiceManager _manager) : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult> GetAllBooks()
+        public async Task<ActionResult> GetAllBooks([FromQuery]BookParameters bookParameters)
         {
-           var models = await _manager.BookService.GetAllBooksAsync(false);
-           return Ok(models);
+           var pageResult = await _manager.BookService.GetAllBooksAsync(bookParameters,false);
+            Response.Headers["X-Pagination"] = JsonSerializer.Serialize(pageResult.metaData);
+           return Ok(pageResult.booksDto);
         }
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetOneBook([FromRoute(Name = "id")] int id)
