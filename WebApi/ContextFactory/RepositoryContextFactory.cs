@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Repositories.Models;
+using Repositories.EFCore;
 
 namespace WebApi.ContextFactory
 {

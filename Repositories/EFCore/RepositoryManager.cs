@@ -1,6 +1,6 @@
 ﻿using Repositories.Contracts;
 
-namespace Repositories.Models
+namespace Repositories.EFCore
 {
     public class RepositoryManager() : IRepositoryManager
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Presentation.ActionFilters;
 using Repositories.Contracts;
-using Repositories.Models;
+using Repositories.EFCore;
 using Services.Contracts;
 using Services.Models;
 using System.Net;

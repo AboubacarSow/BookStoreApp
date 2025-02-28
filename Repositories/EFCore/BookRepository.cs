@@ -2,8 +2,9 @@
 using Entities.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Contracts;
+using Repositories.EFCore.Extensions;
 
-namespace Repositories.Models
+namespace Repositories.EFCore
 {
     public class BookRepository : RepositoryBase<Book>, IBookRepository
     {
@@ -19,6 +20,8 @@ namespace Repositories.Models
         {
 
             var source=await FindAll(trackChanges)
+                  .FilterBooks(bookParameters.MinPrice,bookParameters.MaxPrice)
+                  .Search(bookParameters.SearchTerm)
                   .OrderBy(b=>b.id)
                   .ToListAsync();
 

@@ -2,7 +2,7 @@
 using Repositories.Contracts;
 using System.Linq.Expressions;
 
-namespace Repositories.Models
+namespace Repositories.EFCore
 {
     //THE BASE CLASS MUST BE AN ABSTRACT CLASS
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class

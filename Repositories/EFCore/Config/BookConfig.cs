@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
-namespace Repositories.Models.Config
+namespace Repositories.EFCore.Config
 {
     public class BookConfig : IEntityTypeConfiguration<Book>
     {

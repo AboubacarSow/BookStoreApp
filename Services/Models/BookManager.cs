@@ -38,6 +38,8 @@ namespace Services.Models
         //Why is it necessary to return a tuple in this level?
         public async Task<(IEnumerable<BookDto>,MetaData)> GetAllBooksAsync(BookParameters bookParameters, bool trackChanges)
         {
+            if (!bookParameters.ValidePriceRange)
+                throw new PriceOutOfRangeBadRequestException();
             var booksWithPagedList=await _manager.Book.GetAllBooksAsync(bookParameters,trackChanges);
            var bookDto=  _mapper.Map<IEnumerable<BookDto>>(booksWithPagedList);
             return (bookDto, booksWithPagedList.MetaData);
