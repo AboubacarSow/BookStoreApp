@@ -22,7 +22,7 @@ namespace Repositories.EFCore
             var source=await FindAll(trackChanges)
                   .FilterBooks(bookParameters.MinPrice,bookParameters.MaxPrice)
                   .Search(bookParameters.SearchTerm)
-                  .OrderBy(b=>b.id)
+                  .Sort(bookParameters.OrderBy)
                   .ToListAsync();
 
             return  PagedList<Book>
