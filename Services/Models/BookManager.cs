@@ -1,6 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Dynamic;
+using System.Runtime.CompilerServices;
+using AutoMapper;
 using Entities.DataTransfertObjects;
 using Entities.Exceptions;
+using Entities.LinkModels;
 using Entities.Models;
 using Entities.RequestFeatures;
 using Repositories.Contracts;
@@ -13,11 +16,16 @@ namespace Services.Models
         private readonly IRepositoryManager _manager;
         private readonly ILoggerService _logger;
         private readonly IMapper _mapper;
-        public BookManager(IRepositoryManager manager, ILoggerService logger, IMapper mapper)
+        private readonly IDataShaper<BookDto> _shaper;
+        private readonly IBookLinks _bookLinks;
+        public BookManager(IRepositoryManager manager, ILoggerService logger,
+        IMapper mapper,IDataShaper<BookDto> shaper,IBookLinks bookLinks)
         {
             _manager = manager;
             _logger = logger;
             _mapper = mapper;
+            _shaper=shaper;
+            _bookLinks=bookLinks;
         }
 
         public async Task<BookDto> CreateOneBookAsync(BookDtoInsertion bookDtoInsertion)
@@ -36,13 +44,16 @@ namespace Services.Models
         }
 
         //Why is it necessary to return a tuple in this level?
-        public async Task<(IEnumerable<BookDto>,MetaData)> GetAllBooksAsync(BookParameters bookParameters, bool trackChanges)
+        public async Task<(LinkResponse linkResponse,MetaData metaData)> GetAllBooksAsync(LinkParameters linkParameters, bool trackChanges)
         {
-            if (!bookParameters.ValidePriceRange)
+            if (!linkParameters.BookParameters.ValidePriceRange)
                 throw new PriceOutOfRangeBadRequestException();
-            var booksWithPagedList=await _manager.Book.GetAllBooksAsync(bookParameters,trackChanges);
+            var booksWithPagedList=await _manager.Book.GetAllBooksAsync(linkParameters.BookParameters,trackChanges);
            var bookDto=  _mapper.Map<IEnumerable<BookDto>>(booksWithPagedList);
-            return (bookDto, booksWithPagedList.MetaData);
+           var links= _bookLinks.TryGenerateLinks(bookDto,
+           linkParameters.BookParameters.Fields!,linkParameters.HttpContext);
+           
+            return (linkResponse: links, metaData: booksWithPagedList.MetaData);
         }
 
         public async Task<BookDto?> GetOneBookByIdAsync(int id, bool trackChanges)
@@ -84,6 +95,12 @@ namespace Services.Models
             model=_mapper.Map<Book>(bookDto);
             _manager.Book.Update(model);
             await _manager.SaveAsync();
+        }
+
+        public async Task<List<BookDto>> GetAllBooksAsync(bool trackChanges)
+        {
+            var books = await _manager.Book.GetAllBooksAsync(trackChanges);
+            return _mapper.Map<List<BookDto>>(books);
         }
     }
 }

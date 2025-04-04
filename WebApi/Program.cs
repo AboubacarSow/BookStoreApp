@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using NLog;
 using Presentation.ActionFilters;
 using Services.Contracts;
+using Services.Models;
 using WebApi.Infrastructure.Extensions;
 
 namespace WebApi
@@ -20,9 +21,11 @@ namespace WebApi
                 //Content Negociation Part
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
-            }).AddCustomCsvFormatter()
-              .AddXmlDataContractSerializerFormatters() 
-              .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly).AddNewtonsoftJson();
+            })
+              .AddCustomCsvFormatter()
+              .AddXmlDataContractSerializerFormatters()
+              .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
+              
 
 
             builder.Services.Configure<ApiBehaviorOptions>(options =>
@@ -30,7 +33,7 @@ namespace WebApi
                 options.SuppressModelStateInvalidFilter = true;
 
             });
-              
+            builder.Services.ConfigureApiVersioning();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -40,7 +43,10 @@ namespace WebApi
             builder.Services.ConfigureRepositoryManager();
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureLoggerService();
+            builder.Services.AddCustomMediaTypes();
             builder.Services.ConfigureActionFiltersAttribute();
+            builder.Services.ConfigureDataShaper();
+            builder.Services.AddScoped<IBookLinks,BookLinks>();
 
             //We configure our api policy here by expoxing the X-Pagination header as well
             builder.Services.ConfigureCors();
