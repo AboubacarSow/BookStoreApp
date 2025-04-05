@@ -2,6 +2,7 @@
 using Entities.Exceptions;
 using Entities.LinkModels;
 using Entities.RequestFeatures;
+using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ActionFilters;
@@ -14,11 +15,14 @@ namespace Presentation.Controllers
     [Route("api/books")]
     [ServiceFilter(typeof(LogFilterAttribute))]
     [ApiController]
+    //[ResponseCache(CacheProfileName ="3mins")]
+    //[HttpCacheExpiration(CacheLocation =CacheLocation.Public,MaxAge =70)]
     public class BooksController(IServiceManager _manager) : ControllerBase
     {
         [HttpHead]
         [HttpGet(Name = "GetAllBooks")]
         [ServiceFilter(typeof(ValidationMediaTypeAttribute))]
+        [ResponseCache(Duration =60)]
         public async Task<ActionResult> GetAllBooks([FromQuery]BookParameters bookParameters)
         {
             var linkParameters=new LinkParameters(){

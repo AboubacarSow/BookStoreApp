@@ -190,3 +190,33 @@
 2025-04-04 07:51:47.1009 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
 2025-04-04 07:51:47.1274 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
 2025-04-04 07:51:47.1575 Info Configuration initialized.
+2025-04-05 00:24:34.3687 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-05 00:24:34.3949 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-05 00:24:34.4151 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-05 00:24:34.4391 Info Configuration initialized.
+2025-04-05 00:25:46.0576 Info AppDomain Shutting down. LogFactory closing...
+2025-04-05 00:25:46.0726 Info LogFactory has been closed.
+2025-04-05 00:27:26.2388 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-05 00:27:26.2689 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-05 00:27:26.2904 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-05 00:27:26.3162 Info Configuration initialized.
+2025-04-05 00:39:52.0722 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-05 00:39:52.1152 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-05 00:39:52.1470 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-05 00:39:52.1725 Info Configuration initialized.
+2025-04-05 00:57:18.6374 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-05 00:57:18.6808 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-05 00:57:18.7053 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-05 00:57:18.7327 Info Configuration initialized.
+2025-04-05 02:31:16.9738 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-05 02:31:17.0083 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-05 02:31:17.0348 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-05 02:31:17.0636 Info Configuration initialized.
+2025-04-05 02:48:52.7834 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-05 02:48:52.8177 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-05 02:48:52.8456 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-05 02:48:52.8782 Info Configuration initialized.
+2025-04-05 03:42:54.8236 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-05 03:42:54.8585 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-05 03:42:54.8831 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-05 03:42:54.9137 Info Configuration initialized.

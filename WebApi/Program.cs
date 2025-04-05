@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
 using Presentation.ActionFilters;
@@ -21,6 +22,7 @@ namespace WebApi
                 //Content Negociation Part
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
+                config.CacheProfiles.Add("3mins", new CacheProfile() { Duration=180});
             })
               .AddCustomCsvFormatter()
               .AddXmlDataContractSerializerFormatters()
@@ -43,10 +45,19 @@ namespace WebApi
             builder.Services.ConfigureRepositoryManager();
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureLoggerService();
-            builder.Services.AddCustomMediaTypes();
+            //Action Filters
             builder.Services.ConfigureActionFiltersAttribute();
+            //Content Negotiation & Hypdermedia
+            builder.Services.AddCustomMediaTypes();
             builder.Services.ConfigureDataShaper();
             builder.Services.AddScoped<IBookLinks,BookLinks>();
+            // Caching Process
+            builder.Services.ConfigureResponsCaching();
+            builder.Services.ConfigureHttpCacheHeaders();
+            //Rate Limitation
+            builder.Services.AddMemoryCache();
+            builder.Services.ConfigureRateLimitingOptions();
+            builder.Services.AddHttpContextAccessor();
 
             //We configure our api policy here by expoxing the X-Pagination header as well
             builder.Services.ConfigureCors();
@@ -72,8 +83,12 @@ namespace WebApi
                 app.UseHsts();  
             }
             app.UseHttpsRedirection();
+            app.UseIpRateLimiting();//This method has to be called before Cors()
             //Here we allow our api's consumers to access it
             app.UseCors(policyName: "CorsPolicy");
+            app.UseResponseCaching();//The UseResponseCaching() has to be called just after Cors()
+            app.UseHttpCacheHeaders();
+
 
             app.UseAuthorization();
 

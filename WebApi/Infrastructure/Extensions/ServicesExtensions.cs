@@ -1,4 +1,6 @@
-﻿using Entities.DataTransfertObjects;
+﻿using AspNetCoreRateLimit;
+using Entities.DataTransfertObjects;
+using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -17,14 +19,14 @@ namespace WebApi.Infrastructure.Extensions
     {
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<RepositoryContext>(options=>
+            services.AddDbContext<RepositoryContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
-           
+
         }
         public static void ConfigureRepositoryManager(this IServiceCollection services)
-        { 
-            services.AddScoped<IRepositoryManager, RepositoryManager>();    
-        
+        {
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
+
         }
         public static void ConfigureServiceManager(this IServiceCollection services)
         {
@@ -53,21 +55,21 @@ namespace WebApi.Infrastructure.Extensions
                 });
             });
         }
-        public static void ConfigureDataShaper(this IServiceCollection services){
+        public static void ConfigureDataShaper(this IServiceCollection services) {
             services.AddScoped<IDataShaper<BookDto>, DataShaper<BookDto>>();
         }
         public static void AddCustomMediaTypes(this IServiceCollection services)
         {
-            services.Configure<MvcOptions>(config=>
+            services.Configure<MvcOptions>(config =>
             {
-                var systemTextJsonOutputFormatter=config
+                var systemTextJsonOutputFormatter = config
                 .OutputFormatters
                 .OfType<SystemTextJsonOutputFormatter>()?.FirstOrDefault();
                 systemTextJsonOutputFormatter?.SupportedMediaTypes
                                             .Add("application/vnd.btkakademi.hateoas+json");
                 systemTextJsonOutputFormatter?.SupportedMediaTypes
                                             .Add("application/vnd.btkakademi.apiroot+json");
-                var systemTextXmlOutputFormatter=config
+                var systemTextXmlOutputFormatter = config
                        .OutputFormatters
                        .OfType<XmlDataContractSerializerOutputFormatter>()?.FirstOrDefault();
                 systemTextXmlOutputFormatter?.SupportedMediaTypes
@@ -86,10 +88,42 @@ namespace WebApi.Infrastructure.Extensions
                 options.DefaultApiVersion = new ApiVersion(1, 0);
                 options.ApiVersionReader = new HeaderApiVersionReader("api-version");
                 options.Conventions.Controller<BooksController>()
-                                    .HasApiVersion(new ApiVersion(1,0));
+                                    .HasApiVersion(new ApiVersion(1, 0));
                 options.Conventions.Controller<BooksV2Controller>()
                                    .HasDeprecatedApiVersion(new ApiVersion(2, 0));
             });
+        }
+        public static void ConfigureResponsCaching(this IServiceCollection services) =>
+            services.AddResponseCaching();
+        public static void ConfigureHttpCacheHeaders(this IServiceCollection services) =>
+            services.AddHttpCacheHeaders(expressionOptions =>
+            {
+                expressionOptions.CacheLocation = CacheLocation.Public;
+                expressionOptions.MaxAge = 80;
+            },
+            validationOptions =>
+            {
+                validationOptions.MustRevalidate = false;// What this does?
+            });
+        public static void ConfigureRateLimitingOptions(this IServiceCollection services)
+        {
+            var rateLimitRules = new List<RateLimitRule>()
+            {
+                new(){
+                    Endpoint="*",
+                    Limit=4,
+                    Period="1m"
+                }
+            };
+            services.Configure<IpRateLimitOptions>(options =>
+            {
+                options.GeneralRules = rateLimitRules;
+            });
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+
         }
     }
 }
