@@ -41,7 +41,7 @@ namespace WebApi
             builder.Services.ConfigureApiVersioning();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.ConfigureSwagger();
             //In case to extend this IServiceCollection we need to use IConfiguration as parameter of our extention  method:Here 
             //ConfigureSqlConnection
             builder.Services.ConfigureSqlContext(builder.Configuration);
@@ -77,12 +77,16 @@ namespace WebApi
             var logger = app.Services.GetRequiredService<ILoggerService>();
 
             app.ConfigureExceptionHandler(logger);
-            
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(s =>
+                {
+                    s.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore API V1");
+                    s.SwaggerEndpoint("/swagger/v2/swagger.json", "BookStore API V2");
+                });
             }
             if(app.Environment.IsProduction())
             {

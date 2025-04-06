@@ -1,10 +1,12 @@
 ﻿using Entities.LinkModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Controllers
 {
-    [Route("api")]
+    [ApiExplorerSettings(GroupName = "v1")]
+    [Route("api/v{version:apiVersion}")]
     public class RootController : ControllerBase
     {
         private readonly LinkGenerator _linkGenerator;

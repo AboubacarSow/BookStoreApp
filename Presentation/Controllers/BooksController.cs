@@ -16,10 +16,12 @@ namespace Presentation.Controllers
     [Route("api/books")]
     [ServiceFilter(typeof(LogFilterAttribute))]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "v1")]
     //[ResponseCache(CacheProfileName ="3mins")]
     //[HttpCacheExpiration(CacheLocation =CacheLocation.Public,MaxAge =70)]
     public class BooksController(IServiceManager _manager) : ControllerBase
     {
+        
         [Authorize]
         [HttpHead]
         [HttpGet(Name = "GetAllBooks")]

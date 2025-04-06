@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Presentation.ActionFilters;
 using Presentation.Controllers;
 using Repositories.Contracts;
@@ -98,6 +99,7 @@ namespace WebApi.Infrastructure.Extensions
                 options.Conventions.Controller<BooksV2Controller>()
                                    .HasDeprecatedApiVersion(new ApiVersion(2, 0));
             });
+            
         }
         public static void ConfigureResponsCaching(this IServiceCollection services) =>
             services.AddResponseCaching();
@@ -117,7 +119,7 @@ namespace WebApi.Infrastructure.Extensions
             {
                 new(){
                     Endpoint="*",
-                    Limit=4,
+                    Limit=25,
                     Period="1m"
                 }
             };
@@ -176,6 +178,42 @@ namespace WebApi.Infrastructure.Extensions
                     IssuerSigningKey = new SymmetricSecurityKey
                     (Encoding.UTF8.GetBytes(secretKey))
                 };
+            });
+        }
+
+        public static void ConfigureSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new OpenApiInfo() { Title = "BookStore API", Version = "v1" });
+                s.SwaggerDoc("v2", new OpenApiInfo() { Title = "BookStore API", Version = "v2" });
+
+                s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Description = "JWT Authorization header using the Bearer scheme.\\\n Enter your token in the input field below",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat="JWT"
+                });
+                s.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme()
+                        {
+                            Reference=new OpenApiReference()
+                            {
+                                Type=ReferenceType.SecurityScheme,
+                                Id="Bearer"
+                            },
+                            Name="Authorization",
+                            Scheme="bearer",
+                            In=ParameterLocation.Header
+                        },
+                        new List<string>()
+                    }
+                });
             });
         }
     }

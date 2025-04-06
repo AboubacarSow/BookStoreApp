@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ActionFilters;
 using Services.Contracts;
-using System.Threading.Tasks;
+
 
 namespace Presentation.Controllers
 {
+    [ApiExplorerSettings(GroupName ="v1")]
     [ApiController]
     [Route("api/authentication")]
     public class AuthenticationController : ControllerBase
