@@ -1,4 +1,4 @@
-﻿using Entities.DataTransfertObjects;
+﻿using Entities.DataTransfertObjects.BookDtos;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using System.Text;

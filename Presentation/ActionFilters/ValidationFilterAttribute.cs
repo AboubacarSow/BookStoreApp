@@ -9,8 +9,8 @@ namespace Presentation.ActionFilters
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var controller = context.RouteData.Values["controller"];//With this we get the controller 
-            var action=context.RouteData.Values["action"];//Here we get the action
-            var param=context.ActionArguments.SingleOrDefault(p=>p.Value.ToString().Contains("Dto")).Value;//Here we get the param
+            var action = context.RouteData.Values["action"];//Here we get the action
+            var param = context.ActionArguments.SingleOrDefault(p => p.Value.ToString().Contains("Dto")).Value;//Here we get the param
 
             if (param is null)
             {

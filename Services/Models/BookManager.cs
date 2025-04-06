@@ -1,7 +1,7 @@
 ﻿using System.Dynamic;
 using System.Runtime.CompilerServices;
 using AutoMapper;
-using Entities.DataTransfertObjects;
+using Entities.DataTransfertObjects.BookDtos;
 using Entities.Exceptions;
 using Entities.LinkModels;
 using Entities.Models;

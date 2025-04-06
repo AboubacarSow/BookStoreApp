@@ -1,4 +1,4 @@
-﻿namespace Entities.DataTransfertObjects
+﻿namespace Entities.DataTransfertObjects.BookDtos
 {
     public record BookDtoInsertion :BookDtoManipulation
     {

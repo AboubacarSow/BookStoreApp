@@ -22,13 +22,16 @@ namespace WebApi
                 //Content Negociation Part
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
-                config.CacheProfiles.Add("3mins", new CacheProfile() { Duration=180});
+                config.CacheProfiles.Add("3mins", new CacheProfile() { Duration = 180 });
             })
               .AddCustomCsvFormatter()
               .AddXmlDataContractSerializerFormatters()
-              .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
-              
+              .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly)
+              .AddNewtonsoftJson();//Without NewtonsoftJson the binding does not work properly
 
+            // Configure Authentication
+            builder.Services.ConfigureJWToken(builder.Configuration);
+            builder.Services.ConfigureIdentity();
 
             builder.Services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -42,9 +45,12 @@ namespace WebApi
             //In case to extend this IServiceCollection we need to use IConfiguration as parameter of our extention  method:Here 
             //ConfigureSqlConnection
             builder.Services.ConfigureSqlContext(builder.Configuration);
+
+            //Configure Inversion of Control IoC
             builder.Services.ConfigureRepositoryManager();
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureLoggerService();
+            builder.Services.ConfigureAuthManager();
             //Action Filters
             builder.Services.ConfigureActionFiltersAttribute();
             //Content Negotiation & Hypdermedia
@@ -89,7 +95,7 @@ namespace WebApi
             app.UseResponseCaching();//The UseResponseCaching() has to be called just after Cors()
             app.UseHttpCacheHeaders();
 
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();

@@ -1,9 +1,9 @@
-using Entities.DataTransfertObjects;
 using Microsoft.AspNetCore.Http;
 using Services.Contracts;
 using Entities.LinkModels;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Routing;
+using Entities.DataTransfertObjects.BookDtos;
 
 namespace Services.Models
 {

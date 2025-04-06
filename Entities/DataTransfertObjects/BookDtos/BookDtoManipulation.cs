@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Entities.DataTransfertObjects
+namespace Entities.DataTransfertObjects.BookDtos
 {
     public abstract record BookDtoManipulation
     {

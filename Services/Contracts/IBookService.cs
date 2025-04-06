@@ -1,5 +1,5 @@
 ﻿using System.Dynamic;
-using Entities.DataTransfertObjects;
+using Entities.DataTransfertObjects.BookDtos;
 using Entities.LinkModels;
 using Entities.Models;
 using Entities.RequestFeatures;
