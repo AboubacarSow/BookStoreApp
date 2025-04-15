@@ -8,6 +8,7 @@ namespace Presentation.Controllers
 {
     [ApiExplorerSettings(GroupName ="v1")]
     [ApiController]
+    [ServiceFilter(typeof(LogFilterAttribute))]
     [Route("api/authentication")]
     public class AuthenticationController : ControllerBase
     {

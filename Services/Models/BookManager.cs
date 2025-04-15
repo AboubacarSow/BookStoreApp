@@ -38,7 +38,7 @@ namespace Services.Models
 
         public async Task DeleteOneBookAsync(int id, bool trackChanges)
         {
-            var modelDto=await GetOneBookByIdAsync(id,trackChanges);
+            var modelDto=await GetOneBookByIdAndCheckExist(id,trackChanges);
             _manager.Book.DeleteOneBook(_mapper.Map<Book>(modelDto));
             await _manager.SaveAsync();
         }

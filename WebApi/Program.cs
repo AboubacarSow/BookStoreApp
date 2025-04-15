@@ -27,7 +27,11 @@ namespace WebApi
               .AddCustomCsvFormatter()
               .AddXmlDataContractSerializerFormatters()
               .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly)
-              .AddNewtonsoftJson();//Without NewtonsoftJson the binding does not work properly
+              .AddNewtonsoftJson(options =>
+              {
+                  options.SerializerSettings.ReferenceLoopHandling =
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+              });//Without NewtonsoftJson the binding does not work properly
 
             // Configure Authentication
             builder.Services.ConfigureJWToken(builder.Configuration);
@@ -57,8 +61,8 @@ namespace WebApi
             builder.Services.AddCustomMediaTypes();
             builder.Services.ConfigureDataShaper();
             builder.Services.AddScoped<IBookLinks,BookLinks>();
-            // Caching Process
-            builder.Services.ConfigureResponsCaching();
+            // Caching Process- Memory Cache
+            builder.Services.ConfigureResponseCaching();
             builder.Services.ConfigureHttpCacheHeaders();
             //Rate Limitation
             builder.Services.AddMemoryCache();

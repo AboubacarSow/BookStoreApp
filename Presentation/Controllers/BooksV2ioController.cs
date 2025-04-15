@@ -8,7 +8,7 @@ namespace Presentation.Controllers
     [ApiController]
     [ServiceFilter(typeof(LogFilterAttribute))]
     [Route("api/books")]
-    public class BooksV2Controller(IServiceManager manager) : ControllerBase
+    public class BooksV2ioController(IServiceManager manager) : ControllerBase
     {
         private readonly IServiceManager _manager = manager;
 

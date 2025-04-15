@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Presentation.ActionFilters;
@@ -96,12 +95,12 @@ namespace WebApi.Infrastructure.Extensions
                 options.ApiVersionReader = new HeaderApiVersionReader("api-version");
                 options.Conventions.Controller<BooksController>()
                                     .HasApiVersion(new ApiVersion(1, 0));
-                options.Conventions.Controller<BooksV2Controller>()
+                options.Conventions.Controller<BooksV2ioController>()
                                    .HasDeprecatedApiVersion(new ApiVersion(2, 0));
             });
             
         }
-        public static void ConfigureResponsCaching(this IServiceCollection services) =>
+        public static void ConfigureResponseCaching(this IServiceCollection services) =>
             services.AddResponseCaching();
         public static void ConfigureHttpCacheHeaders(this IServiceCollection services) =>
             services.AddHttpCacheHeaders(expressionOptions =>
@@ -179,6 +178,7 @@ namespace WebApi.Infrastructure.Extensions
                     (Encoding.UTF8.GetBytes(secretKey))
                 };
             });
+            services.AddAuthorization();
         }
 
         public static void ConfigureSwagger(this IServiceCollection services)
@@ -190,8 +190,8 @@ namespace WebApi.Infrastructure.Extensions
 
                 s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
-                    Description = "JWT Authorization header using the Bearer scheme.\\\n Enter your token in the input field below",
                     In = ParameterLocation.Header,
+                    Description = "Place where to add JWT token",
                     Name = "Authorization",
                     Type = SecuritySchemeType.Http,
                     Scheme = "bearer",

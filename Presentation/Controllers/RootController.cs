@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Routing;
 namespace Presentation.Controllers
 {
     [ApiExplorerSettings(GroupName = "v1")]
-    [Route("api/v{version:apiVersion}")]
+    [Route("api")]
     public class RootController : ControllerBase
     {
         private readonly LinkGenerator _linkGenerator;
