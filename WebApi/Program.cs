@@ -5,6 +5,7 @@ using Presentation.ActionFilters;
 using Services.Contracts;
 using Services.Models;
 using WebApi.Infrastructure.Extensions;
+using WebApi.Utilities;
 
 namespace WebApi
 {
@@ -102,7 +103,6 @@ namespace WebApi
             app.UseCors(policyName: "CorsPolicy");
             app.UseResponseCaching();//The UseResponseCaching() has to be called just after Cors()
             app.UseHttpCacheHeaders();
-
             app.UseAuthentication();
             app.UseAuthorization();
 

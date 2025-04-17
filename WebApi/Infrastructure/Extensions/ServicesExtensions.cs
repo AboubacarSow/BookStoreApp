@@ -159,7 +159,7 @@ namespace WebApi.Infrastructure.Extensions
         public static void ConfigureJWToken(this IServiceCollection services,IConfiguration configuration)
         {
             var jwtsettings = configuration.GetSection("JwtSettings");
-            string secretKey = jwtsettings["secretKey"]!;
+            string secretKey = jwtsettings["secretKey"];
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -171,21 +171,13 @@ namespace WebApi.Infrastructure.Extensions
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateIssuerSigningKey = true,
+                    ValidateLifetime=true,
                     ValidIssuer = jwtsettings["validIssuer"],
                     ValidAudience = jwtsettings["validAudience"],
                     IssuerSigningKey = new SymmetricSecurityKey
                     (Encoding.UTF8.GetBytes(secretKey))
                 };
-                /*options.Events = new JwtBearerEvents
-                {
-                    OnChallenge = context =>
-                    {
-                        context.HandleResponse();
-                        context.Response.StatusCode = 401;
-                        context.Response.ContentType = "application/json";
-                        return context.Response.WriteAsync("{\"error\": \"Unauthorized\"}");
-                    }
-                };*/
+                
             });
             services.AddAuthorization();
         }

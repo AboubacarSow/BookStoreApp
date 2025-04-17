@@ -2,6 +2,7 @@
 using Entities.Exceptions;
 using Entities.LinkModels;
 using Entities.RequestFeatures;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +19,17 @@ namespace Presentation.Controllers
     [ApiExplorerSettings(GroupName = "v1")]
     //[ResponseCache(CacheProfileName ="3mins")]
     //[HttpCacheExpiration(CacheLocation =CacheLocation.Public,MaxAge =70)]
-    public class BooksController(IServiceManager _manager) : ControllerBase
+    [Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
+    public class BooksController : ControllerBase
     {
-  
-        [Authorize]
+        private readonly IServiceManager _manager;
+
+        public BooksController(IServiceManager manager)
+        {
+            _manager = manager;
+        }
+
+        //[Authorize]
         [HttpHead]
         [HttpGet(Name = "GetAllBooks")]
         [ServiceFilter(typeof(ValidationMediaTypeAttribute))]
