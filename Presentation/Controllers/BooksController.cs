@@ -20,7 +20,7 @@ namespace Presentation.Controllers
     //[HttpCacheExpiration(CacheLocation =CacheLocation.Public,MaxAge =70)]
     public class BooksController(IServiceManager _manager) : ControllerBase
     {
-        
+  
         [Authorize]
         [HttpHead]
         [HttpGet(Name = "GetAllBooks")]

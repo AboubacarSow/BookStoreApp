@@ -171,12 +171,21 @@ namespace WebApi.Infrastructure.Extensions
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateIssuerSigningKey = true,
-
                     ValidIssuer = jwtsettings["validIssuer"],
                     ValidAudience = jwtsettings["validAudience"],
                     IssuerSigningKey = new SymmetricSecurityKey
                     (Encoding.UTF8.GetBytes(secretKey))
                 };
+                /*options.Events = new JwtBearerEvents
+                {
+                    OnChallenge = context =>
+                    {
+                        context.HandleResponse();
+                        context.Response.StatusCode = 401;
+                        context.Response.ContentType = "application/json";
+                        return context.Response.WriteAsync("{\"error\": \"Unauthorized\"}");
+                    }
+                };*/
             });
             services.AddAuthorization();
         }

@@ -9,7 +9,7 @@ namespace Entities.LogModel
 {
     public class LogDetails
     {
-        public object? ModeName {  get; set; }
+        public object? ModelName {  get; set; }
         public object? Controller {  get; set; }
         public object? Action {  get; set; }
         public object? Id {  get; set; }
