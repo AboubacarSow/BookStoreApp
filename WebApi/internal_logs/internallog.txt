@@ -418,3 +418,27 @@
 2025-04-18 00:14:32.8389 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
 2025-04-18 00:14:32.8656 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
 2025-04-18 00:14:32.8928 Info Configuration initialized.
+2025-04-18 00:40:36.5411 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-18 00:40:36.5727 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-18 00:40:36.5956 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-18 00:40:36.6234 Info Configuration initialized.
+2025-04-18 00:50:51.0310 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-18 00:50:51.0597 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-18 00:50:51.0811 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-18 00:50:51.1067 Info Configuration initialized.
+2025-04-18 00:51:59.3196 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-18 00:51:59.3478 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-18 00:51:59.3698 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-18 00:51:59.3960 Info Configuration initialized.
+2025-04-18 00:56:15.4518 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-18 00:56:15.4809 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-18 00:56:15.5028 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-18 00:56:15.5285 Info Configuration initialized.
+2025-04-18 00:56:49.8624 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-18 00:56:49.8910 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-18 00:56:49.9119 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-18 00:56:49.9355 Info Configuration initialized.
+2025-04-18 01:02:18.9412 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-04-18 01:02:18.9714 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-04-18 01:02:18.9925 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=D:\BTK_Akademi\bsStoreApp\WebApi\nlog.config
+2025-04-18 01:02:19.0178 Info Configuration initialized.

@@ -36,6 +36,7 @@ namespace WebApi
 
             // Configure Authentication
             builder.Services.ConfigureJWToken(builder.Configuration);
+            builder.Services.ConfigureApplicationCookies();
             builder.Services.ConfigureIdentity();
             //What does this code ?
             builder.Services.Configure<ApiBehaviorOptions>(options =>

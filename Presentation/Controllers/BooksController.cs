@@ -19,7 +19,8 @@ namespace Presentation.Controllers
     [ApiExplorerSettings(GroupName = "v1")]
     //[ResponseCache(CacheProfileName ="3mins")]
     //[HttpCacheExpiration(CacheLocation =CacheLocation.Public,MaxAge =70)]
-    [Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
+    // [Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     public class BooksController : ControllerBase
     {
         private readonly IServiceManager _manager;

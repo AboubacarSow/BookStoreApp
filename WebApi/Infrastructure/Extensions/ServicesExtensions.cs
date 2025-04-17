@@ -132,14 +132,26 @@ namespace WebApi.Infrastructure.Extensions
             services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
 
         }
+        public static void ConfigureApplicationCookies(this IServiceCollection services)
+        {
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Events.OnRedirectToLogin = context =>
+                {
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    return Task.CompletedTask;
+                };
+            });
+        }
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            services.AddIdentity<User, IdentityRole>(options =>
+            services.AddIdentityCore<User>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequiredLength = 6;
-                options.Password.RequireUppercase = false;//What does it mean?
+                options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
 
                 options.User.RequireUniqueEmail = true;
@@ -147,6 +159,7 @@ namespace WebApi.Infrastructure.Extensions
                
                 
             })
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<RepositoryContext>()
             .AddDefaultTokenProviders();//For authentication via JWT
         }
