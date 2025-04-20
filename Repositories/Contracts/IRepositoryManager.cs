@@ -7,6 +7,7 @@
         
         //Ici nous n'avons pour le moment que IBookRepository
         IBookRepository Book {  get; }
+        ICategoryRepository Category { get; }
         Task SaveAsync();
     }
 }

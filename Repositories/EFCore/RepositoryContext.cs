@@ -1,7 +1,6 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Repositories.EFCore.Config;
 using System.Reflection;
 namespace Repositories.EFCore
 {
@@ -9,12 +8,21 @@ namespace Repositories.EFCore
     {
         public RepositoryContext(DbContextOptions<RepositoryContext> options) : base(options) { }
         public DbSet<Book> Books { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);// Why this method?
-            //modelBuilder.ApplyConfiguration(new BookConfig());
-            //modelBuilder.ApplyConfiguration(new RoleConfig());
-            //Intead writing this two lines, we just write this following line
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Book>()
+                         .HasOne(b => b.Category)
+                         .WithMany(c => c.Books)
+                         .HasForeignKey(b => b.CategoryId)
+                         .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }

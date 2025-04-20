@@ -7,10 +7,10 @@ namespace Repositories.EFCore.Extensions
 {
     public static class OrderQueryBuilder
     {
-        public static String CreateOrderQuery(string orderByQueryString)
+        public static String CreateOrderQuery<T>(string orderByQueryString)
         {
             var orderParams = orderByQueryString.Trim().Split(',');
-            var propertyInfos = typeof(Book)
+            var propertyInfos = typeof(T)
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance);
             var orderQueryBuilder = new StringBuilder();
             foreach (var param in orderParams)

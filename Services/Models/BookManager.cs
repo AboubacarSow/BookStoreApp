@@ -62,7 +62,7 @@ namespace Services.Models
             return _mapper.Map<BookDto>(model);
         }
 
-        private async Task<Book?> GetOneBookByIdAndCheckExist(int id, bool trackChanges)
+        private async Task<Book> GetOneBookByIdAndCheckExist(int id, bool trackChanges)
         {
             var model = await _manager.Book.GetOneBookByIdAsync(id, trackChanges);
 
@@ -91,8 +91,8 @@ namespace Services.Models
 
         public async Task UpdateOneBookAsync(int id, BookDtoUpdate bookDto, bool trackChanges)
         {
-            var model=await GetOneBookByIdAndCheckExist(id,trackChanges);
-            model=_mapper.Map<Book>(bookDto);
+            await GetOneBookByIdAndCheckExist(id,trackChanges);
+            var model=_mapper.Map<Book>(bookDto);
             _manager.Book.Update(model);
             await _manager.SaveAsync();
         }

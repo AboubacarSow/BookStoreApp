@@ -42,7 +42,7 @@ namespace Presentation.Controllers
             var token = await _manager
                 .AuthenticationService
                 .CreateTokenAsync(true);
-            return Ok(token);
+            return Ok(new {accesstoken=token.AccessToken,refreshtoken=token.RefreshToken});
         }
 
         [HttpPost("refresh")]
@@ -50,7 +50,7 @@ namespace Presentation.Controllers
         public async Task<IActionResult> Refresh([FromBody]TokenDto tokenDto)
         {
             var token = await _manager.AuthenticationService.RefreshTokenAsync(tokenDto);
-            return Ok(token);
+            return Ok(new { accesstoken = token.AccessToken, refreshtoken = token.RefreshToken });
         }
     }
 }

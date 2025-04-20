@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Presentation.ActionFilters;
 using Services.Contracts;
 
@@ -12,7 +14,19 @@ namespace Presentation.Controllers
     {
         private readonly IServiceManager _manager = manager;
 
+        /// <summary>
+        /// Retrieves all books with pagination, sorting, and HATEOAS links.
+        /// </summary>
+        /// <param name="bookParameters">Pagination, sorting, and filtering parameters</param>
+        /// <returns>A paginated list of books with or without links based on the header</returns>
+        /// <response code="200">Returns the list of books</response>
+        /// <response code="400">Invalid parameters</response>
+        /// <response code="401">Unauthorized</response>
+        [Authorize]
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> GetAllBooks()
         {
             var books = await _manager.BookService.GetAllBooksAsync(false);

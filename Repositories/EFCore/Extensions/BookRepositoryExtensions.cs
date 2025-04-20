@@ -24,7 +24,7 @@ namespace Repositories.EFCore.Extensions
         {
             if (string.IsNullOrWhiteSpace(orderByQueryString))
                 return books.OrderBy(b => b.id);
-            var orderQuery = OrderQueryBuilder.CreateOrderQuery(orderByQueryString);
+            var orderQuery = OrderQueryBuilder.CreateOrderQuery<Book>(orderByQueryString);
             return orderQuery is null
                    ? books.OrderBy(b => b.id)
                    : books.OrderBy(orderQuery);

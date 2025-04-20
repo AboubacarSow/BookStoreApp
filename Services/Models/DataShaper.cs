@@ -1,7 +1,4 @@
-using System.Dynamic;
-using System.Net.Http.Headers;
 using System.Reflection;
-using AutoMapper.Configuration.Annotations;
 using Services.Contracts;
 namespace Services.Models
 {

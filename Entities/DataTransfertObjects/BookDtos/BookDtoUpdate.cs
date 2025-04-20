@@ -4,7 +4,8 @@ namespace Entities.DataTransfertObjects.BookDtos
 {
     public record BookDtoUpdate : BookDtoManipulation
     {
-        [Required] public int id { get; set; }
+        public int id { get; set; }
+        public int CategoryId { get; init; } 
 
     }
 }

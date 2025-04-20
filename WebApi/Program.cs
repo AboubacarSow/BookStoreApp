@@ -56,7 +56,8 @@ namespace WebApi
             builder.Services.ConfigureRepositoryManager();
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureLoggerService();
-            builder.Services.ConfigureAuthManager();
+            builder.Services.RegisterRepositories();
+            builder.Services.RegisterServices();
             //Action Filters
             builder.Services.ConfigureActionFiltersAttribute();
             //Content Negotiation & Hypdermedia

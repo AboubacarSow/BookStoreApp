@@ -1,9 +1,12 @@
-﻿namespace Entities.DataTransfertObjects.BookDtos
+﻿using Entities.DataTransfertObjects.CategoryDtos;
+
+namespace Entities.DataTransfertObjects.BookDtos
 {
     public record BookDto
     {
-        public int id { get; set; }
-        public string? Title { get; set; }
-        public decimal Price { get; set; }
+        public int id { get; init; }
+        public string? Title { get; init; }
+        public decimal Price { get; init ; }
+        public CategoryDto Category { get; init; }
     }
 }

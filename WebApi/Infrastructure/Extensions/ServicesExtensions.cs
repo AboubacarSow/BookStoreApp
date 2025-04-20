@@ -163,12 +163,6 @@ namespace WebApi.Infrastructure.Extensions
             .AddEntityFrameworkStores<RepositoryContext>()
             .AddDefaultTokenProviders();//For authentication via JWT
         }
-
-        public static void ConfigureAuthManager(this IServiceCollection services)
-        {
-            services.AddScoped<IAuthenticationService, AuthenticationManager>();
-        }
-
         public static void ConfigureJWToken(this IServiceCollection services,IConfiguration configuration)
         {
             var jwtsettings = configuration.GetSection("JwtSettings");
@@ -199,8 +193,32 @@ namespace WebApi.Infrastructure.Extensions
         {
             services.AddSwaggerGen(s =>
             {
-                s.SwaggerDoc("v1", new OpenApiInfo() { Title = "BookStore API", Version = "v1" });
-                s.SwaggerDoc("v2", new OpenApiInfo() { Title = "BookStore API", Version = "v2" });
+                s.SwaggerDoc("v1", new OpenApiInfo() {
+                    Title = "Book Store API", 
+                    Version = "v1",
+                    Description= "A RESTful API designed for managing books and their categories. It supports the creation, modification, deletion, and retrieval of books, " +
+                    "with JWT authentication for secure access.",
+                    TermsOfService=new Uri("https://www.btkakademi.gov.tr/"),
+                    Contact= new OpenApiContact 
+                    { 
+                        Email="aboubacarsow2004@gmail.com",
+                        Name="ABOUBACAR SOW",
+                        Url=new Uri("htpps://www.boubasow.com")
+                    }
+                });
+                s.SwaggerDoc("v2", new OpenApiInfo() {
+                    Title = "Book Store API",
+                    Version = "v2",
+                    Description = "A RESTful API designed for managing books and their categories. It supports the creation, modification, deletion, and retrieval of" +
+                    " books, with JWT authentication for secure access.",
+                    TermsOfService = new Uri("https://www.btkakademi.gov.tr/"),
+                    Contact = new OpenApiContact
+                    {
+                        Email = "aboubacarsow2004@gmail.com",
+                        Name = "ABOUBACAR SOW",
+                        Url = new Uri("htpps://www.boubasow.com")
+                    }
+                });
 
                 s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
@@ -229,6 +247,19 @@ namespace WebApi.Infrastructure.Extensions
                     }
                 });
             });
+        }
+        public static void RegisterRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+        }
+        public static void RegisterServices(this IServiceCollection services)
+        {
+            services.AddScoped<IBookService, BookManager>();
+            services.AddScoped<ICategoryService, CategoryManager>();
+            services.AddScoped<IAuthenticationService, AuthenticationManager>();
+            services.AddScoped<IFileService, FileManager>();
+
         }
     }
 }
