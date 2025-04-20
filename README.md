@@ -71,7 +71,7 @@ Includes a ready-to-use Postman collection for easy testing of all endpoints.
 Supports uploading and downloading files via dedicated endpoints.
 
 
-- ### 🛠️ Technologies Used
+ ### 🛠️ Technologies Used
 - 🧱 **ASP.NET Core Web API**
 - 🗃️ **Entity Framework Core**
 - 🛢️ **SQL Server**
