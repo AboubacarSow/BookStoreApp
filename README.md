@@ -9,69 +9,69 @@
 - ##### 📝 Comprehensive Logging
 Implemented using NLog for detailed, configurable logging.
 
-##### ❌ Global Error Handling
+- ##### ❌ Global Error Handling
 Centralized exception management through a custom middleware ExceptionMiddlewareExtension, with dedicated exception classes per entity.
 
-##### 🔄 Automatic Object Mapping
+- ##### 🔄 Automatic Object Mapping
 Uses AutoMapper to simplify the mapping between models and DTOs.
 
-##### 🔀 Content Negotiation
+- ##### 🔀 Content Negotiation
 Supports multiple response formats: JSON, XML, and CSV.
 
-##### ✅ Request Validation
+- ##### ✅ Request Validation
 Input validation handled via Action Filters to keep controllers clean.
 
-##### ⚙️ Asynchronous Codebase
+- ##### ⚙️ Asynchronous Codebase
 Fully asynchronous programming model for improved scalability and performance.
 
-##### 📦 Pagination with Metadata
+- ##### 📦 Pagination with Metadata
 Includes metadata such as total items, page size, and current page in responses.
 
-##### 🎯 Advanced Querying
-  ###### 🔍 Filtering: Narrow down results using query parameters
+- ##### 🎯 Advanced Querying
+  - ###### 🔍 Filtering: Narrow down results using query parameters
 
-  ###### 🧠 Searching: Perform keyword-based searches
+  - ###### 🧠 Searching: Perform keyword-based searches
 
-  ###### ↕️ Sorting: Sort results by one or more fields
+  - ###### ↕️ Sorting: Sort results by one or more fields
 
-  ###### 🧩 Data Shaping: Select only specific fields (implemented on Book entity)
+  - ###### 🧩 Data Shaping: Select only specific fields (implemented on Book entity)
 
-##### 🔗 HATEOAS (Hypermedia as the Engine of Application State)
+- ##### 🔗 HATEOAS (Hypermedia as the Engine of Application State)
 Adds navigational links to enhance discoverability and self-documentation of the API.
 
-##### 🧭 HTTP OPTIONS & HEAD Support
+- ##### 🧭 HTTP OPTIONS & HEAD Support
 Provides clients with supported HTTP methods and resource availability.
 
-##### 🏠 Root Documentation Endpoint
+- ##### 🏠 Root Documentation Endpoint
 Root-level route offering API metadata and entry points.
 
-##### 🧬 API Versioning
+- ##### 🧬 API Versioning
 Enables multiple versions of the API to coexist seamlessly.
 
-##### 🧠 Caching Mechanism
+- ##### 🧠 Caching Mechanism
 Response caching is implemented to optimize performance and reduce server load.
 
-##### 🚦 Rate Limiting (Throttling)
+- ##### 🚦 Rate Limiting (Throttling)
 Limits the number of requests per client to prevent abuse and ensure fair usage.
 
-##### 🔐 Authentication & Authorization
+- ##### 🔐 Authentication & Authorization
 - 👤 **Based on ASP.NET Identity**
 
 - 🧾 **JWT-based tokens with Refresh Token support**
 
 - 🛡️ **Role-based access control**
 
-##### 📘 Interactive Swagger Documentation
+- ##### 📘 Interactive Swagger Documentation
 Fully integrated with Swagger (OpenAPI) for live API testing and exploration.
 
-##### 🧪 Postman Testing Collection
+- ##### 🧪 Postman Testing Collection
 Includes a ready-to-use Postman collection for easy testing of all endpoints.
 
-##### 📁 File Upload & Download
+- ##### 📁 File Upload & Download
 Supports uploading and downloading files via dedicated endpoints.
 
 
-### 🛠️ Technologies Used
+- ### 🛠️ Technologies Used
 - 🧱 **ASP.NET Core Web API**
 - 🗃️ **Entity Framework Core**
 - 🛢️ **SQL Server**
