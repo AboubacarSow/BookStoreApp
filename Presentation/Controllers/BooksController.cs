@@ -42,7 +42,7 @@ namespace Presentation.Controllers
         [HttpGet(Name = "GetAllBooks")]
         [ServiceFilter(typeof(ValidationMediaTypeAttribute))]
         [ResponseCache(Duration =60)]
-        [ProducesResponseType(typeof(PagedList<BookDto>),StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult> GetAllBooks([FromQuery]BookParameters bookParameters)
@@ -63,9 +63,9 @@ namespace Presentation.Controllers
                     : Ok(linkResponse.ShapedEntities);
                   
         }
-      
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [Authorize]
         [HttpGet("{id:int}",Name = "GetOneBook")]

@@ -15,7 +15,7 @@ namespace Presentation.Controllers
         {
             _linkGenerator = linkGenerator;
         }
-
+        
         [HttpGet(Name = "GetRoot")]
         public IActionResult GetRoot([FromHeader(Name = "Accept")] string mediaType)
         {
