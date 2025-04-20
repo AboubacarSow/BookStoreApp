@@ -1,7 +1,6 @@
 ﻿using Entities.DataTransfertObjects.BookDtos;
 using Entities.Exceptions;
 using Entities.LinkModels;
-using Entities.Models;
 using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

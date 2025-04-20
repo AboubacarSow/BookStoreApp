@@ -67,6 +67,36 @@ namespace Presentation.Controllers
                     Href=_linkGenerator.GetUriByName(HttpContext, nameof(BooksController.DeleteOneBook),new{id = 2 }),
                     Relation="books",
                     Method="Delete"
+                },
+                new()
+                {
+                    Href=_linkGenerator.GetUriByName(HttpContext, nameof(CategoriesController.GetAll),new{}),
+                    Relation="categories",
+                    Method="GET"
+                },
+                new()
+                {
+                    Href=_linkGenerator.GetUriByName(HttpContext, nameof(CategoriesController.GetOneCategory),new{id=1}),
+                    Relation="categories",
+                    Method="GET"
+                },
+                new()
+                {
+                    Href=_linkGenerator.GetUriByName(HttpContext, nameof(CategoriesController.CreateOneCategory),new{}),
+                    Relation="categories",
+                    Method="POST"
+                },
+                new()
+                {
+                    Href=_linkGenerator.GetUriByName(HttpContext, nameof(CategoriesController.UpdateOneCategory),new{id=1}),
+                    Relation="categories",
+                    Method="PUT"
+                },
+                new()
+                {
+                    Href=_linkGenerator.GetUriByName(HttpContext, nameof(CategoriesController.UpdateOneCategory),new{id=1}),
+                    Relation="categories",
+                    Method="Delete"
                 }
             };
             return Ok(list);

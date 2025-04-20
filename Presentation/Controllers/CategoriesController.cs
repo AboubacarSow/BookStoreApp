@@ -65,7 +65,7 @@ namespace Presentation.Controllers
             });
         }
         [Authorize(Roles ="Admin")]
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id:int}",Name = "DeleteOneCategory")]
         public async Task<IActionResult> DeleteOneCategory([FromRoute]int id)
         {
             if (String.IsNullOrWhiteSpace(id.ToString()))
